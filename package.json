@@ -1,5 +1,6 @@
 {
   "name": "railroad-ink",
+  "author": "Drew Wyatt <drew.j.wyatt@gmail.com>",
   "version": "0.1.0",
   "private": true,
   "scripts": {

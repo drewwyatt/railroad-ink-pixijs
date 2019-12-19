@@ -1,3 +1,4 @@
+import { splitEvery } from 'ramda'
 import { Route } from './routes'
 import { Tile, toTile } from './tiles'
 
@@ -16,6 +17,7 @@ export class Board {
   set = (x: number, y: number, tile: Tile) => {
     this.tiles[this.toIdx(x, y)] = tile
   }
+  toRows = () => splitEvery(this.width, this.tiles)
 
   private toIdx = (x: number, y: number) => this.width * y + x
 }

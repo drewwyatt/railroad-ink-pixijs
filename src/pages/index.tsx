@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { DIE1 } from '../models'
-import Die from '../components/Die'
+import DiceBlock from '../components/DiceBlock'
 import Grid from '../components/Grid'
 
 const Home = () => (
@@ -11,7 +10,7 @@ const Home = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
 
-    <Die faces={DIE1} />
+    <DiceBlock />
     <div className="grid-container">
       <Grid />
     </div>

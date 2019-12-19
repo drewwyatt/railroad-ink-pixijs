@@ -1,20 +1,42 @@
-import React, { FC, useState } from 'react'
+import React, { DetailedHTMLProps, FC, SelectHTMLAttributes, useCallback } from 'react'
+import { flip, includes } from 'ramda'
 import { Die as Model, DieFace } from '../models'
 
-type Props = { faces: Model }
+const DEFAULT_VALUE = undefined
 
-const Die: FC<Props> = ({ faces }) => {
-  const [selectedFace, select] = useState<DieFace>()
+type SelectProps = DetailedHTMLProps<
+  SelectHTMLAttributes<HTMLSelectElement>,
+  HTMLSelectElement
+>
+type Props = Omit<SelectProps, 'onChange'> & {
+  faces: Model
+  onChange(dieFace: DieFace | typeof DEFAULT_VALUE): void
+}
+
+const Die: FC<Props> = ({ faces, onChange, ...selectProps }) => {
+  const isDieFace = useCallback(flip(includes)(faces), [faces]) as (
+    selection: any,
+  ) => selection is DieFace
+  const sanitizedOnChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      if (isDieFace(e.target.value)) {
+        onChange(e.target.value)
+      } else {
+        onChange(DEFAULT_VALUE)
+      }
+    },
+    [onChange],
+  )
   return (
-    <select onChange={e => select(e.target.value as DieFace)}>
-      <option>Choose a route</option>
-      {faces.map(toOption(selectedFace))}
+    <select onChange={sanitizedOnChange} {...selectProps}>
+      <option>Select a route</option>
+      {faces.map(toOption)}
     </select>
   )
 }
 
-const toOption = (selected: DieFace | undefined) => (face: DieFace) => (
-  <option key={face} value={face} selected={face === selected}>
+const toOption = (face: DieFace) => (
+  <option key={face} value={face}>
     {face}
   </option>
 )

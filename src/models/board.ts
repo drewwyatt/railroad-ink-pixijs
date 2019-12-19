@@ -12,8 +12,10 @@ export class Board {
     this.tiles = new Array(this.width * this.height).fill(toTile(Route.Empty))
   }
 
-  get = (x: number, y: number) => this.tiles[0] // TODO
+  get = (x: number, y: number) => this.tiles[this.toIdx(x, y)]
   set = (x: number, y: number, tile: Tile) => {
-    this.tiles[0] = tile // TODO
+    this.tiles[this.toIdx(x, y)] = tile
   }
+
+  private toIdx = (x: number, y: number) => this.width * y + x
 }

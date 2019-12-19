@@ -1,10 +1,16 @@
-import React, { FC, useState } from 'react'
-import { Board, Tile } from '../models'
+import React, { FC, useMemo } from 'react'
+import { splitEvery } from 'ramda'
+import { BOARD_WIDTH } from '../constants'
+import { Tile } from '../models'
+import { useBoard } from '../state'
+
+const groupInRows = (tiles: Tile[]) => splitEvery(BOARD_WIDTH, tiles)
 
 const Grid: FC = () => {
-  const [board] = useState(new Board())
+  const [tiles] = useBoard()
+  const rows = useMemo(() => groupInRows(tiles), [tiles])
 
-  return <table>{board.toRows().map(toRow)}</table>
+  return <table>{rows.map(toRow)}</table>
 }
 
 type RowProps = { tiles: Tile[] }

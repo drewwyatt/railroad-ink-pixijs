@@ -1,6 +1,6 @@
 import { createContext, Dispatch } from 'react'
 import { toProvider } from '../utils'
-import { Action, DEFAULT_STATE, reducer, State } from './state'
+import { reducer, DEFAULT_STATE, State, Action } from './state'
 
 const CONTEXT = createContext<[State, Dispatch<Action>]>(undefined)
 

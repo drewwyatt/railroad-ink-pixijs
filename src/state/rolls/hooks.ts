@@ -1,11 +1,7 @@
-import { Dispatch, useCallback, useContext } from 'react'
+import { useContext } from 'react'
+import { wrapWithDispatch } from '../utils'
 import CONTEXT from './context'
 import { commitRoll, makeSelection } from './state'
-
-const wrapWithDispatch = <T extends (...args: any[]) => any>(
-  fn: T,
-  dispatch: Dispatch<ReturnType<T>>,
-) => useCallback((...args: Parameters<T>) => dispatch(fn(...args)), [])
 
 export const useCurrentRoll = () => {
   const [state, dispatch] = useContext(CONTEXT)

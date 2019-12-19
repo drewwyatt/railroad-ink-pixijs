@@ -1,6 +1,10 @@
 import React, { FC } from 'react'
-import { RollsProvider } from '../state'
+import { BoardProvider, RollsProvider } from '../state'
 
-const State: FC = ({ children }) => <RollsProvider>{children}</RollsProvider>
+const State: FC = ({ children }) => (
+  <BoardProvider>
+    <RollsProvider>{children}</RollsProvider>
+  </BoardProvider>
+)
 
 export default State

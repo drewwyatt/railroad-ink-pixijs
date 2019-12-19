@@ -1,6 +1,7 @@
 import { Route } from './routes'
 
 export type Die = readonly Route[]
+export type DieFace = Die[number]
 
 export const DIE1: Die = [
   Route.StraightHighway,

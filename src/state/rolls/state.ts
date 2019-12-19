@@ -17,7 +17,7 @@ export const makeSelection = (idx: Index, selection: PendingFace) =>
 
 export const commitRoll = () => ({ type: 'commitRoll' } as const)
 
-type Action = ReturnType<typeof makeSelection | typeof commitRoll>
+export type Action = ReturnType<typeof makeSelection | typeof commitRoll>
 
 // reducer
 

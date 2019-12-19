@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import DiceBlock from '../components/DiceBlock'
 import Grid from '../components/Grid'
+import State from '../components/State'
 
 const Home = () => (
   <div>
@@ -9,11 +10,12 @@ const Home = () => (
       <title>Railroad Ink</title>
       <link rel="icon" href="/favicon.ico" />
     </Head>
-
-    <DiceBlock />
-    <div className="grid-container">
-      <Grid />
-    </div>
+    <State>
+      <DiceBlock />
+      <div className="grid-container">
+        <Grid />
+      </div>
+    </State>
 
     <style global jsx>{`
       html,

@@ -1,29 +1,29 @@
 export enum Route {
   // die 1
-  StraightHighway,
-  CurvedHighway,
-  TJunctionHighway,
-  StraightRailway,
-  CurvedRailway,
-  TJunctionRailway,
+  StraightHighway = 'StraightHighway',
+  CurvedHighway = 'CurvedHighway',
+  TJunctionHighway = 'TJunctionHighway',
+  StraightRailway = 'StraightRailway',
+  CurvedRailway = 'CurvedRailway',
+  TJunctionRailway = 'TJunctionRailway',
 
   // die 2
-  Overpass,
-  StraightStation,
-  CurvedStation,
+  Overpass = 'Overpass',
+  StraightStation = 'StraightStation',
+  CurvedStation = 'CurvedStation',
 
   // special tiles
-  THighwayRailwayStation,
-  TRailwayHighwayStation,
-  FourWayHighway,
-  FourWayRailway,
-  CurvedHighwayRailwayStation,
-  StraightHighwayRailwayStation,
+  THighwayRailwayStation = 'THighwayRailwayStation',
+  TRailwayHighwayStation = 'TRailwayHighwayStation',
+  FourWayHighway = 'FourWayHighway',
+  FourWayRailway = 'FourWayRailway',
+  CurvedHighwayRailwayStation = 'CurvedHighwayRailwayStation',
+  StraightHighwayRailwayStation = 'StraightHighwayRailwayStation',
 
   // pre-placed
-  ExitHighway,
-  ExitRailway,
-  Empty,
+  ExitHighway = 'ExitHighway',
+  ExitRailway = 'ExitRailway',
+  Empty = 'Empty',
 }
 
 export const NORMAL_ROUTES = [

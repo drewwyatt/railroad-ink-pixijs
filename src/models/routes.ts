@@ -1,4 +1,4 @@
-enum Route {
+export enum Route {
   // die 1
   StraightHighway,
   CurvedHighway,
@@ -59,5 +59,3 @@ export const isExitRoute = (route: any): route is ExitRoute => EXIT_ROUTES.inclu
 
 export type EmptyRoute = Route.Empty
 export const isEmptyRoute = (route: any): route is Route.Empty => route === Route.Empty
-
-export default Route

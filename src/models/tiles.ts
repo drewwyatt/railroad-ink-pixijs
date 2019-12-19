@@ -1,4 +1,4 @@
-import Route from './routes'
+import { Route } from './routes'
 
 export enum Connection {
   Highway,
@@ -14,20 +14,20 @@ export enum Orientation {
 }
 
 export type Tile = Record<Orientation, Connection> & {
-  name: Route
+  route: Route
   hasStation: boolean
   orientation: Orientation
 }
 
-const toTile = (
-  name: Route,
+const make = (
+  route: Route,
   top: Connection,
   right: Connection,
   bottom: Connection,
   left: Connection,
   hasStation: boolean = false,
 ): Tile => ({
-  name,
+  route,
   top,
   right,
   bottom,
@@ -38,22 +38,25 @@ const toTile = (
 
 const { Highway, Railway, None } = Connection
 export const TILES = [
-  toTile(Route.StraightHighway, Highway, None, Highway, None),
-  toTile(Route.CurvedHighway, None, Highway, Highway, None),
-  toTile(Route.TJunctionHighway, None, Highway, Highway, Highway),
-  toTile(Route.StraightRailway, Railway, None, Railway, None),
-  toTile(Route.CurvedRailway, None, Railway, Railway, None),
-  toTile(Route.TJunctionRailway, None, Railway, Railway, Railway),
-  toTile(Route.Overpass, Highway, Railway, Highway, Railway),
-  toTile(Route.StraightStation, Highway, None, Railway, None, true),
-  toTile(Route.CurvedStation, None, Highway, Railway, None, true),
-  toTile(Route.THighwayRailwayStation, Highway, Highway, Railway, Highway, true),
-  toTile(Route.TRailwayHighwayStation, Railway, Railway, Highway, Railway, true),
-  toTile(Route.FourWayHighway, Highway, Highway, Highway, Highway),
-  toTile(Route.FourWayRailway, Railway, Railway, Railway, Railway),
-  toTile(Route.CurvedHighwayRailwayStation, Highway, Railway, Railway, Highway, true),
-  toTile(Route.StraightHighwayRailwayStation, Highway, Railway, Highway, Railway, true),
-  toTile(Route.ExitHighway, Highway, None, None, None, true),
-  toTile(Route.ExitRailway, Railway, None, None, None),
-  toTile(Route.Empty, None, None, None, None),
-]
+  make(Route.StraightHighway, Highway, None, Highway, None),
+  make(Route.CurvedHighway, None, Highway, Highway, None),
+  make(Route.TJunctionHighway, None, Highway, Highway, Highway),
+  make(Route.StraightRailway, Railway, None, Railway, None),
+  make(Route.CurvedRailway, None, Railway, Railway, None),
+  make(Route.TJunctionRailway, None, Railway, Railway, Railway),
+  make(Route.Overpass, Highway, Railway, Highway, Railway),
+  make(Route.StraightStation, Highway, None, Railway, None, true),
+  make(Route.CurvedStation, None, Highway, Railway, None, true),
+  make(Route.THighwayRailwayStation, Highway, Highway, Railway, Highway, true),
+  make(Route.TRailwayHighwayStation, Railway, Railway, Highway, Railway, true),
+  make(Route.FourWayHighway, Highway, Highway, Highway, Highway),
+  make(Route.FourWayRailway, Railway, Railway, Railway, Railway),
+  make(Route.CurvedHighwayRailwayStation, Highway, Railway, Railway, Highway, true),
+  make(Route.StraightHighwayRailwayStation, Highway, Railway, Highway, Railway, true),
+  make(Route.ExitHighway, Highway, None, None, None, true),
+  make(Route.ExitRailway, Railway, None, None, None),
+  make(Route.Empty, None, None, None, None),
+] as const
+
+export const tileIsRoute = (route: Route) => (tile: Tile) => tile.route === route
+export const toTile = (route: Route) => TILES.find(tileIsRoute(route))!

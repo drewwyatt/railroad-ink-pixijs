@@ -1,5 +1,7 @@
 import { Route } from './routes'
 
+export type Coords = { x: number; y: number }
+
 export enum Connection {
   Highway,
   Railway,

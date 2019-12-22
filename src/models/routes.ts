@@ -1,3 +1,5 @@
+import { values } from 'ramda'
+
 export enum Route {
   // die 1
   StraightHighway = 'StraightHighway',
@@ -25,6 +27,8 @@ export enum Route {
   ExitRailway = 'ExitRailway',
   Empty = 'Empty',
 }
+
+export const isRoute = (route: any): route is Route => values(Route).includes(route)
 
 export const NORMAL_ROUTES = [
   Route.StraightHighway,

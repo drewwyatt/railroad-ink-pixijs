@@ -14,7 +14,7 @@ type Props = Omit<SelectProps, 'onChange' | 'value'> & {
   onChange(dieFace: DieFace | typeof DEFAULT_VALUE): void
 }
 
-const Die: FC<Props> = ({ faces, onChange, value, ...selectProps }) => {
+const Die: FC<Props> = ({ faces, onChange, ...selectProps }) => {
   const isDieFace = useCallback(flip(includes)(faces), [faces]) as (
     selection: any,
   ) => selection is DieFace
@@ -31,13 +31,13 @@ const Die: FC<Props> = ({ faces, onChange, value, ...selectProps }) => {
   return (
     <select onChange={sanitizedOnChange} {...selectProps}>
       <option>Select a route</option>
-      {faces.map(toOption(value))}
+      {faces.map(toOption)}
     </select>
   )
 }
 
-const toOption = (selected: DieFace | undefined) => (face: DieFace) => (
-  <option key={face} value={face} selected={face === selected}>
+const toOption = (face: DieFace) => (
+  <option key={face} value={face}>
     {face}
   </option>
 )
